@@ -8,6 +8,7 @@ int main()
     int m; // items per query
     int t; // maximum value in query
     cin >> n >> m >> t;
+    cout << n << " " << m << endl;
     for (int i = 0; i < n; i++)
     {
         for (int j = 0; j < m; j++)

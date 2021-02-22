@@ -2,23 +2,32 @@
 using namespace std;
 int main()
 {
-    int n;
-    cin >> n;
+    int n, m;
+    cin >> n >> m;
     for (int i = 0; i < n; i++)
     {
-        string s;
-        cin >> s;
-        string a = s.substr(0, s.length() / 2);
-        string b = s.substr(s.length() / 2 + s.length() % 2);
-        reverse(b.begin(), b.end());
-        if (a == b)
+        long long v[105];
+        for (int i = 0; i < m; i++)
         {
-            cout << "True" << endl;
+            cin >> v[i];
         }
-        else
+        long long t1 = 0, t2 = 0;
+        for (int i = 0; i < m; i++)
         {
-            cout << "False" << endl;
+            if (v[i] > t1)
+            {
+                if (t1 > t2)
+                {
+                    t2 = t1;
+                }
+                t1 = v[i];
+            }
+            else if (v[i] > t2)
+            {
+                t2 = v[i];
+            }
         }
+        cout << t1 * t2 << endl;
     }
     return 0;
 }

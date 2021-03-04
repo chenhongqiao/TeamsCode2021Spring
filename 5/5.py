@@ -1,7 +1,7 @@
 shift = int(input())
 change = input()
 
-alphabet = "ABCDEFGHIJKLMNOPQRSTUVXYZ"
+alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
 idx = 0
 result = ""
@@ -14,4 +14,3 @@ for c in change:
         result += " "
 
 print(result)
-

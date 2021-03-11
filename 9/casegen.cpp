@@ -1,3 +1,4 @@
+// CASEGEN NEEDS TO BE REWRITE TO ADAPT NEW CONTEXT
 #include <bits/stdc++.h>
 #define rand(l, h) (rand() % (h - l + 1) + l)
 using namespace std;

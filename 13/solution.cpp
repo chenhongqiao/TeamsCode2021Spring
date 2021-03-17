@@ -18,8 +18,8 @@ int main()
     long long ans = 0;
     for (int i = 0; i < n; i++)
     {
-        ans += feq[m - i];
+        ans += feq[m - c[i]];
     }
-    cout << ans << endl;
+    cout << ans / 2 << endl;
     return 0;
 }

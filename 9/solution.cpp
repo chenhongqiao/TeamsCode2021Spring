@@ -1,25 +1,32 @@
-// SOLUTION NEEDS TO BE REWRITE TO ADAPT NEW CONTEXT
 #include <bits/stdc++.h>
 using namespace std;
+bool check(string s)
+{
+    string a = s.substr(0, s.length() / 2);
+    string b = s.substr(s.length() / 2 + s.length() % 2);
+    reverse(b.begin(), b.end());
+    return a == b;
+}
 int main()
 {
     int n;
     cin >> n;
+    int ans = 0;
     for (int i = 0; i < n; i++)
     {
         string s;
         cin >> s;
-        string a = s.substr(0, s.length() / 2);
-        string b = s.substr(s.length() / 2 + s.length() % 2);
-        reverse(b.begin(), b.end());
-        if (a == b)
+        for (int j = 1; j < s.size(); j++)
         {
-            cout << "True" << endl;
-        }
-        else
-        {
-            cout << "False" << endl;
+            string l = s.substr(0, j);
+            string r = s.substr(j);
+            if (check(l) && check(r))
+            {
+                ans++;
+                break;
+            }
         }
     }
+    cout << ans << endl;
     return 0;
 }

@@ -1,14 +1,39 @@
-// CASEGEN NEEDS TO BE REWRITE TO ADAPT NEW CONTEXT
 #include <bits/stdc++.h>
 #define rand(l, h) (rand() % (h - l + 1) + l)
 using namespace std;
 string randstr(int l)
 {
-    string s;
+    string s = "";
     for (int i = 0; i < l; i++)
     {
-        s.push_back(rand(0, 9) + '0');
+        int c = rand(0, 2);
+        if (c == 0)
+        {
+            s.push_back(rand(0, 9) + '0');
+        }
+        else if (c == 1)
+        {
+            s.push_back(rand(0, 25) + 'a');
+        }
+        else if (c == 2)
+        {
+            s.push_back(rand(0, 25) + 'A');
+        }
     }
+    return s;
+}
+string parlidrome(int l)
+{
+    string s;
+    string a = randstr(l / 2);
+    string b = a;
+    reverse(b.begin(), b.end());
+    s += a;
+    if (l % 2)
+    {
+        s += randstr(1);
+    }
+    s += b;
     return s;
 }
 int main()
@@ -20,27 +45,26 @@ int main()
     cout << n << endl;
     for (int i = 0; i < n; i++)
     {
+        int kl = rand(1, l);
+        int p = rand(0, kl);
+        string s = "";
         if (rand(0, 1))
         {
-            int kl = rand(2, l);
-            string s;
-            string l = randstr(kl / 2 - 1);
-            string r = l;
-            reverse(l.begin(), l.end());
-            s += l;
-            if (rand(0, 1) || l.length() == 0)
-            {
-                s.push_back(rand(0, 9) + '0');
-            }
-            s += r;
-            cout << s << endl;
+            s += parlidrome(p);
         }
         else
         {
-            int kl = rand(2, l);
-            string s = randstr(kl);
-            cout << s << endl;
+            s += randstr(p);
         }
+        if (rand(0, 1))
+        {
+            s += parlidrome(kl - p);
+        }
+        else
+        {
+            s += randstr(kl - p);
+        }
+        cout << s << endl;
     }
     return 0;
 }

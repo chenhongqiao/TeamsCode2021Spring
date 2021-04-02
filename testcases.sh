@@ -8,7 +8,7 @@ do
     mkdir tests
     
     g++ solution.cpp -o solution -O2
-    javac solution.java
+    javac Solution.java
 
     excep=false
     for c in cases/*.in
@@ -16,9 +16,9 @@ do
         fn=${c##*/}
         num=${fn%.in}
 
-        cat $c | java solution > tests/"$num-java.out"
+        cat $c | java Solution > tests/"$num-java.out"
         cat $c | ./solution > tests/"$num-cpp.out"
-        cat $c | python solution.py > tests/"$num-python.out"
+        cat $c | python "$p.py" > tests/"$num-python.out"
 
         if [[ $(diff -Z tests/"$num-java.out" tests/"$num-cpp.out") || $(diff -Z tests/"$num-python.out" tests/"$num-cpp.out") ]]
         then

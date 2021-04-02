@@ -4,7 +4,7 @@ using namespace std;
 int main()
 {
     srand(time(0));
-    int n;
+    int n; // Max A and B
     cin >> n;
     cout << rand(0, n) << " " << rand(0, n) << endl;
 }

@@ -8,9 +8,5 @@ for _ in range(N):
         num += change
     elif op == "-":
         num -= change
-    elif op == "/":
-        num /= change
-    else:
-        num *= change
     
 print(int(num))

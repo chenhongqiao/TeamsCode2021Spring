@@ -15,13 +15,6 @@ int main()
         case '+':
             v += p;
             break;
-
-        case '*':
-            v *= p;
-            break;
-        case '/':
-            v /= p;
-            break;
         case '-':
             v -= p;
             break;

@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class ReversingNumber
+public class Solution
 {
     public static String reverse(String s)
     {

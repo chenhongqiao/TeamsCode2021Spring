@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class CaesarianCipher
+public class Solution
 {
     public static void main(String[] args)
     {
@@ -11,13 +11,7 @@ public class CaesarianCipher
         for (int i = 0; i < toTranslate.length(); i++)
         {
             char c = toTranslate.charAt(i);
-            char replacement = ' ';
-            if (c != replacement)
-            {
-                replacement = (char) (c - N);
-                if (replacement < 'A') replacement = (char) ('Z' + 1 - N);
-                if (replacement > 'Z') replacement = (char) ('A' + c - 'Z' + 2);
-            }
+            char replacement = (char)((26 + (c - 65 + N) % 26) % 26 + 65);
             translated += replacement;
         }
         System.out.println(translated);

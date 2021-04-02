@@ -8,7 +8,7 @@ int main()
     cin >> s;
     for (int i = 0; i < s.size(); i++)
     {
-        s[i] = (s[i] - 'A' + p) % 26 + 'A';
+        s[i] = (26 + (s[i] - 'A' + p) % 26) % 26 + 'A';
     }
     cout << s << endl;
     return 0;

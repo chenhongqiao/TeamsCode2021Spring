@@ -8,7 +8,7 @@ result = ""
 
 for c in change:
     if c != " ":
-        idx = (alphabet.find(c) - shift) % 26
+        idx = (alphabet.find(c) + shift) % 26
         result += alphabet[idx]
     else:
         result += " "

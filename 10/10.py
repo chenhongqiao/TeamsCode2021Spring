@@ -1,10 +1,3 @@
-def addzero(st):
-    if len(st) < 2:
-        st = '0' + st
-        return st
-    else: 
-        return st
-
 current_time = input()
 S, D = map(int, input().split())
 
@@ -18,9 +11,6 @@ if final_m >= 60:
     final_m -= 60
 
 final_h = (cur_hour + hour) % 24
-
-final_h = addzero(str(final_h))
-final_m = addzero(str(final_m))
 
 print("{}:{}".format(final_h, final_m))
 

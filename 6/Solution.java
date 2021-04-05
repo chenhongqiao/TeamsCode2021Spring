@@ -1,8 +1,6 @@
 
-public class DancingTeamscodeLetters
-{
-    public static void main(String[] args)
-    {
+public class Solution {
+    public static void main(String[] args) {
         System.out.println("  _____     ____  ");
         System.out.println(" |_ \" _| U /\"___| ");
         System.out.println("   | |   \\| | u   ");

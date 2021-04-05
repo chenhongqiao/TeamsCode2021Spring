@@ -48,4 +48,6 @@ do
     echo "output cases generated, clearing up"
     rm -rf tests
     echo "================================"
+
+    cd ..
 done

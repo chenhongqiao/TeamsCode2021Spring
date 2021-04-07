@@ -16,5 +16,8 @@ public class Solution {
                 System.out.printf("%d %d\n", i, cnt);
             }
         }
+        if (n != 1) {
+            System.out.printf("%d 1\n", n);
+        }
     }
 }

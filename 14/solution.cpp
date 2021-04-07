@@ -18,5 +18,9 @@ int main()
             cout << i << " " << cnt << endl;
         }
     }
+    if (n != 1)
+    {
+        cout << n << " " << 1 << endl;
+    }
     return 0;
 }

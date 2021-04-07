@@ -3,6 +3,6 @@ s = input()
 ar = list(map(int, input().split()))
 
 for i in range(N):
-    s = s.replace(s[i], s[i - ar[i]])
+    s = s[:i] + s[i - ar[i]] + s[i+1:]
 
 print(s)

@@ -17,11 +17,7 @@ for i in range(N):
             res += 1
         break
     else:
-        if (ar[i] + radius < ar[i+1] - radius):
+        if (ar[i] + radius + 1 < ar[i+1] - radius):
             res += 1
-            
+
 print(res)
-
-
-
-

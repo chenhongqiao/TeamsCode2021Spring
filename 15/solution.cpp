@@ -28,6 +28,7 @@ int main()
             int ky = q.front().second + dy[i];
             if (kx >= 0 && kx < n && ky >= 0 && ky < n && !v[kx][ky] && g[kx][ky] == 0)
             {
+                v[kx][ky] = true;
                 if (kx == n - 1 && ky == 0)
                 {
                     cout << ans.front() + 1 << endl;

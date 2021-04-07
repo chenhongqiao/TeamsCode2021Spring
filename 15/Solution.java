@@ -17,10 +17,9 @@ public class Solution {
 
         Queue<MazePos> bfsQueue = new LinkedList<>();
         bfsQueue.add(new MazePos(0, 0, 0));
-
+        visited[0][0] = true;
         while (!bfsQueue.isEmpty()) {
             MazePos cur = bfsQueue.poll();
-            visited[cur.r][cur.c] = true;
 
             if (cur.r == n - 1 && cur.c == 0) {
                 System.out.println(cur.d);
@@ -30,21 +29,25 @@ public class Solution {
             // go EAST
             if (cur.c + 1 < n && !map[cur.r][cur.c + 1] && !visited[cur.r][cur.c + 1]) {
                 bfsQueue.add(new MazePos(cur.r, cur.c + 1, cur.d + 1));
+                visited[cur.r][cur.c + 1] = true;
             }
 
             // go SOUTH
             if (cur.r + 1 < n && !map[cur.r + 1][cur.c] && !visited[cur.r + 1][cur.c]) {
                 bfsQueue.add(new MazePos(cur.r + 1, cur.c, cur.d + 1));
+                visited[cur.r + 1][cur.c] = true;
             }
 
             // go WEST
             if (cur.c - 1 >= 0 && !map[cur.r][cur.c - 1] && !visited[cur.r][cur.c - 1]) {
                 bfsQueue.add(new MazePos(cur.r, cur.c - 1, cur.d + 1));
+                visited[cur.r][cur.c - 1] = true;
             }
 
             // go NORTH
             if (cur.r - 1 >= 0 && !map[cur.r - 1][cur.c] && !visited[cur.r - 1][cur.c]) {
                 bfsQueue.add(new MazePos(cur.r - 1, cur.c, cur.d + 1));
+                visited[cur.r - 1][cur.c] = true;
             }
 
         }

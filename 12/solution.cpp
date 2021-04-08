@@ -1,27 +1,26 @@
 #include <bits/stdc++.h>
 using namespace std;
-vector<int> l;
 int main()
 {
-    int n, m, r;
-    cin >> n >> m >> r;
-    l.push_back(-r - 1);
-    l.push_back(m + r);
-    for (int i = 0; i < n; i++)
+    long long n;
+    cin >> n;
+    const int nrt = sqrt(n);
+    for (int i = 2; i <= nrt + 1; i++)
     {
-        int p;
-        cin >> p;
-        l.push_back(p);
-    }
-    sort(l.begin(), l.end());
-    int ans = 0;
-    for (int i = 1; i < l.size(); i++)
-    {
-        if (l[i] - l[i - 1] - 1 > r * 2)
+        int cnt = 0;
+        while (n > 0 && n % i == 0)
         {
-            ans++;
+            n /= i;
+            cnt++;
+        }
+        if (cnt != 0)
+        {
+            cout << i << " " << cnt << endl;
         }
     }
-    cout << ans << endl;
+    if (n != 1)
+    {
+        cout << n << " " << 1 << endl;
+    }
     return 0;
 }

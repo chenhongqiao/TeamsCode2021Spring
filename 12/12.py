@@ -1,23 +1,15 @@
-N, num_blocks, radius = map(int, input().split())
-ar = list(map(int, input().split()))
+N = int(input())
 
-ar = sorted(ar)
+for i in range(2, int(N**0.5)):
+    power = 0
 
-res = 0
+    if N % i == 0:
+        while N % i == 0:
+            N /= i
+            power += 1
 
-if ar[0] - radius > 0:
-    res += 1
+    if power != 0:
+        print("{} {}".format(i, power))
 
-for i in range(N):
-    if ar[i] + radius > num_blocks - 1:
-        break
-
-    if i == N - 1:
-        if (ar[i] + radius <= num_blocks - 1):
-            res += 1
-        break
-    else:
-        if (ar[i] + radius + 1 < ar[i+1] - radius):
-            res += 1
-
-print(res)
+if N != 1:
+    print("{} 1".format(int(N)))

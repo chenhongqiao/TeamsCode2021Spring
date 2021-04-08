@@ -1,23 +1,37 @@
+import java.util.PriorityQueue;
+import java.util.Queue;
 import java.util.Scanner;
 
 public class Solution {
-    public static void main(String[] argS) {
+    public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
-        int nrt = 1 + (int) Math.sqrt(n);
-        for (int i = 2; i < nrt; i++) {
-            int cnt = 0;
-            while (n > 0 && n % i == 0) {
-                n /= i;
-                cnt++;
-            }
+        int m = sc.nextInt();
+        int r = sc.nextInt();
+        Queue<Integer> q = new PriorityQueue<Integer>();
+        for (int i = 0; i < n; i++) {
+            q.add(sc.nextInt());
+        }
 
-            if (cnt != 0) {
-                System.out.printf("%d %d\n", i, cnt);
-            }
+        int dark = 0;
+        int prevPos = q.remove();
+
+        if (prevPos - r > 0)
+            dark++;
+
+        while (!q.isEmpty()) {
+            int curPos = q.remove();
+            // darkness gap dist = curPos - r - (prevPos + r)
+            // = curPos - prevPos - 2r
+            if (curPos - prevPos - 1 - 2 * r > 0)
+                dark++;
+            prevPos = curPos;
         }
-        if (n != 1) {
-            System.out.printf("%d 1\n", n);
-        }
+
+        // last light does not reach end of street?
+        if (prevPos + r < m)
+            dark++;
+
+        System.out.println(dark);
     }
 }

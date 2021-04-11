@@ -16,7 +16,7 @@ int sum(int p)
     }
     return s;
 }
-int update(int p, int v)
+void update(int p, int v)
 {
     while (p <= n + 1)
     {

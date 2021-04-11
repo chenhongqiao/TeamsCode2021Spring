@@ -6,18 +6,12 @@ vector<int> l;
 int main()
 {
     srand(time(0));
-    int n, m; // n should <=m
+    int n, m;
     cin >> n >> m;
-    cout << n << " " << m << " " << endl;
+    cout << n << endl;
     for (int i = 0; i < n; i++)
     {
-        int a = rand(0, m);
-        while (s.find(a) != s.end())
-        {
-            a = rand(0, m);
-        }
-        s.insert(a);
-        cout << a;
+        cout << rand(0, m);
         if (i != n - 1)
         {
             cout << " ";

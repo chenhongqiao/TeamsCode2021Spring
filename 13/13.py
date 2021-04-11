@@ -1,3 +1,4 @@
+# problem changed
 N, target = map(int, input().split())
 
 ar = list(map(int, input().split()))

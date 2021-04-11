@@ -21,7 +21,7 @@ int main()
 {
     cin >> n >> m;
     string rt;
-    for (int i = 0; i < n; i++)
+    for (int i = 0; i < n - 1; i++)
     {
         string a, b;
         int x;

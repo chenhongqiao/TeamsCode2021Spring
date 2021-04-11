@@ -1,25 +1,41 @@
 #include <bits/stdc++.h>
 #define umap unordered_map
 using namespace std;
-umap<long long, int> feq;
-vector<long long> c;
+struct person
+{
+    int id;
+    int s;
+};
+vector<person> p;
+bool cmp(const person &a, const person &b)
+{
+    return a.s > b.s;
+}
+int ans[100005];
 int main()
 {
     int n;
-    long long m;
-    cin >> n >> m;
+    cin >> n;
     for (int i = 0; i < n; i++)
     {
         int v;
         cin >> v;
-        c.push_back(v);
-        feq[v]++;
+        p.push_back({i, v});
     }
-    long long ans = 0;
+    sort(p.begin(), p.end(), cmp);
+    int rk = 1;
+    for (int i = 0; i < p.size(); i++)
+    {
+        ans[p[i].id] = rk;
+        if (i != n - 1 && p[i + 1].s != p[i].s)
+        {
+            rk = i + 2;
+        }
+    }
     for (int i = 0; i < n; i++)
     {
-        ans += feq[m - c[i]];
+        cout << ans[i] << " ";
     }
-    cout << ans / 2 << endl;
+    cout << endl;
     return 0;
 }

@@ -2,33 +2,27 @@ import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.Scanner;
 
-public class Solution
-{
+public class Solution {
     public static int n;
     public static int tree[];
 
-    public static int sum(int p)
-    {
+    public static int sum(int p) {
         int s = 0;
-        while (p > 0)
-        {
+        while (p > 0) {
             s += tree[p];
             p -= p & -p;
         }
         return s;
     }
 
-    public static void update(int p, int v)
-    {
-        while (p <= n + 1)
-        {
+    public static void update(int p, int v) {
+        while (p <= n + 1) {
             tree[p] += v;
             p += p & -p;
         }
     }
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
         n = sc.nextInt();
@@ -40,13 +34,11 @@ public class Solution
 
         Queue<Pair> q = new PriorityQueue<>();
 
-        for (int i = 1; i <= n; i++)
-        {
+        for (int i = 1; i <= n; i++) {
             a[i] = sc.nextInt();
         }
 
-        for (int i = 0; i < n - 1; i++)
-        {
+        for (int i = 0; i < n - 1; i++) {
             int pageA = sc.nextInt();
             int pageB = sc.nextInt();
             snum[pageA]++;
@@ -55,15 +47,13 @@ public class Solution
 
         sc.close();
 
-        for (int i = 1; i <= n; i++)
-        {
+        for (int i = 1; i <= n; i++) {
             if (snum[i] == 0)
                 q.add(new Pair(a[i], i));
         }
 
         long ans = 0;
-        while (!q.isEmpty())
-        {
+        while (!q.isEmpty()) {
             Pair cur = q.poll();
             int p = cur.second;
             ans += sum(p);
@@ -78,20 +68,17 @@ public class Solution
 
     }
 
-    static class Pair implements Comparable<Pair>
-    {
+    static class Pair implements Comparable<Pair> {
         public int first;
         public int second;
 
-        public Pair(int first, int second)
-        {
+        public Pair(int first, int second) {
             this.first = first;
             this.second = second;
         }
 
         @Override
-        public int compareTo(BookReading.Pair arg0)
-        {
+        public int compareTo(Solution.Pair arg0) {
             // reverse comparison for maxheap
             return -Integer.compare(first, arg0.first);
         }

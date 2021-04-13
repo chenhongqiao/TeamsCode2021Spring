@@ -2,17 +2,17 @@
 #define rand(l, h) (rand() % (h - l + 1) + l)
 using namespace std;
 short int mz[1005][1005];
-int n;
+int n, m;
 int main()
 {
     srand(time(0));
-    cin >> n;
-    cout << n << endl;
-    for (int i = 0; i < n; i++)
+    cin >> m >> n;
+    cout << n << " " << m << endl;
+    for (int i = 0; i < m; i++)
     {
         for (int j = 0; j < n; j++)
         {
-            if ((i == 0 && j == 0) || (i == n - 1 && j == 0))
+            if ((i == 0 && j == 0) || (i == m - 1 && j == n - 1))
             {
                 continue;
             }
@@ -23,7 +23,7 @@ int main()
         }
     }
 
-    for (int i = 0; i < n; i++)
+    for (int i = 0; i < m; i++)
     {
         for (int j = 0; j < n; j++)
         {

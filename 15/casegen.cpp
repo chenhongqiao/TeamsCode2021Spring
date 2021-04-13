@@ -16,7 +16,7 @@ int main()
             {
                 continue;
             }
-            if (rand(0, 3) == 3)
+            if (rand(0, 7) == 7)
             {
                 mz[i][j] = 1;
             }

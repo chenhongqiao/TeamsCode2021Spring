@@ -1,28 +1,56 @@
-// problem changed
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Scanner;
-import java.util.Set;
 
-public class Solution {
-    public static void main(String[] args) {
+public class Solution
+{
+    public static void main(String[] args)
+    {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
-        int m = sc.nextInt();
-        int[] arr = new int[n];
-        Set<Integer> set = new HashSet<>();
-
-        for (int i = 0; i < n; i++) {
-            arr[i] = sc.nextInt();
+        int[] ans = new int[100005];
+        List<Person> p = new ArrayList<>();
+        for (int i = 0; i < n; i++)
+        {
+            int v = sc.nextInt();
+            p.add(new Person(i, v));
         }
-
-        int res = 0;
-
-        for (int i = 0; i < n; i++) {
-            if (set.contains(m - arr[i])) {
-                res++;
+        
+        Collections.sort(p);
+        int rk = 1;
+        
+        for (int i = 0; i < p.size(); i++)
+        {
+            ans[p.get(i).id] = rk;
+            if (i != n - 1 && p.get(i + 1).s != p.get(i).s)
+            {
+                rk = i + 2;
             }
-            set.add(arr[i]);
         }
-        System.out.println(res);
+
+        for (int i = 0; i < n; i++)
+            System.out.print(ans[i] + " ");
+
+        System.out.println();
+    }
+
+    static class Person implements Comparable<Person>
+    {
+        public int id;
+        public int s;
+
+        public Person(int id, int s)
+        {
+            this.id = id;
+            this.s = s;
+        }
+
+        @Override
+        public int compareTo(Ranks.Person arg0)
+        {
+            return Integer.compare(arg0.s, s);
+        }
+
     }
 }

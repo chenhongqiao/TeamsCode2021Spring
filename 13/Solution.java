@@ -47,7 +47,7 @@ public class Solution
         }
 
         @Override
-        public int compareTo(Ranks.Person arg0)
+        public int compareTo(Person arg0)
         {
             return Integer.compare(arg0.s, s);
         }

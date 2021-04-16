@@ -1,20 +1,20 @@
 N = int(input())
-ar = []
+start_pos = []
+s = []
 
-for _ in range(N):
-    S, E = map(int, input().split())
+for i in range(N):
+    start_pos.append(list(map(int, input().split())))
 
-    if (not ar) or E > ar[-1]:
-        ar.append(E)
-    else:
-        bound = 0
+start_pos = sorted(start_pos)
 
-        for i, num in enumerate(ar):
-            if E < num:
-                bound = i
+for tup in start_pos:
+    s.append(tup[1])
 
-        ar[i] = E
+res = 1
+slow = s[N-1]
+for i in range(N-1, -1, -1):
+    if s[i] < slow:
+        res += 1
+    slow = min(slow, s[i])
 
-print(len(ar))
-
-
+print(res)

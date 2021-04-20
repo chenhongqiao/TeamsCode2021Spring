@@ -1,6 +1,6 @@
 N = int(input())
 
-for i in range(2, int(N**0.5)):
+for i in range(2, int(N**0.5+1)):
     power = 0
 
     if N % i == 0:

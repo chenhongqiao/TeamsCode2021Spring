@@ -7,7 +7,7 @@ int main()
 {
     srand(time(0));
     cin >> m >> n;
-    cout << n << " " << m << endl;
+    cout << m << " " << n << endl;
     for (int i = 0; i < m; i++)
     {
         for (int j = 0; j < n; j++)

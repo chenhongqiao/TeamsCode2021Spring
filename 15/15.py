@@ -1,7 +1,7 @@
 # problem updated
 from collections import deque
 
-N = int(input())
+N, M = map(int, input().split())
 maze = []
 done = False
 

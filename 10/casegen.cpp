@@ -3,6 +3,7 @@
 using namespace std;
 int main()
 {
+    srand(time(0));
     int s; // Max S
     int d; // Max D
     cin >> s >> d;

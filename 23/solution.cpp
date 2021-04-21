@@ -16,7 +16,7 @@ int main()
     int ba = c;
     for (int i = 0; i < m - 1; i++)
     {
-        int dp[10005];
+        int dp[50005];
         for (int j = 0; j < 10005; j++)
         {
             dp[j] = -1000000005;

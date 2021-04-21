@@ -17,7 +17,7 @@ for i in range(N-1):
 
     if i == 0:
         rt = a
-    
+
     if a not in g:
         g[a] = []
     if b not in g:
@@ -32,4 +32,3 @@ dfs(rt, 0)
 for i in range(M):
     a, b = map(str, input().split())
     print(dp[b] - dp[a])
-

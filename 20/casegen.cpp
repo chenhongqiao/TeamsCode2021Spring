@@ -11,8 +11,8 @@ int main()
     for (int i = 0; i < n; i++)
     {
         int a = rand(1, m);
-        int b = rand(1, m);
-        cout << min(a, b) << " " << max(a, b) << endl;
+        int b = rand(0, (int)((m - a) / 10));
+        cout << a << " " << a + b << endl;
     }
     return 0;
 }

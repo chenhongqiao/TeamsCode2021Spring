@@ -29,7 +29,7 @@ void bfs(int f, int fv)
         ans[k.first] = max(ans[k.first], k.second);
         for (int i = 0; i < g[k.first].size(); i++)
         {
-            if (!vis[g[k.first][i]] && !mp[g[k.first][i]] && k.second / 2 > ans[g[k.first][i]])
+            if (!vis[g[k.first][i]] && !mp[g[k.first][i]] && k.second / 2 > ans[g[k.first][i]] && k.first != 1)
             {
                 vis[g[k.first][i]] = true;
                 q.push({g[k.first][i], k.second / 2});
@@ -62,7 +62,7 @@ int main()
     {
         bfs(df[i].first, df[i].second);
     }
-    for (int i = 1; i <= n; i++)
+    for (int i = 2; i <= n; i++)
     {
         ar.push_back({i, ans[i]});
     }

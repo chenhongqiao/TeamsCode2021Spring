@@ -11,7 +11,7 @@ cd $cur
 mkdir tmp 2>/dev/null
 echo "-p $3 -t 4 -m 262144" > config # 256mb
 echo >> config
-for i in {1..5}; do
+for i in {1..10}; do
     echo "test $i.in $i.out" >> config
 done
 

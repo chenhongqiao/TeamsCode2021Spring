@@ -1,62 +1,54 @@
 #include <bits/stdc++.h>
+#define umap unordered_map
 using namespace std;
-int n;
-int a[100005];
-int f[100005];
-int snum[100005];
-priority_queue<pair<int, int>> q;
-int tree[100005];
-int sum(int p)
+int n, m;
+long long ans = 0;
+umap<int, umap<int, vector<pair<int, int>>>> g;
+umap<int, umap<int, bool>> v;
+vector<pair<int, int>> st;
+long long bfs(int x, int y)
 {
-    int s = 0;
-    while (p > 0)
+    queue<pair<int, int>> q;
+    q.push({x, y});
+    int cnt = 1;
+    while (!q.empty())
     {
-        s += tree[p];
-        p -= p & -p;
+        int kx = q.front().first;
+        int ky = q.front().second;
+        for (int i = 0; i < g[kx][ky].size(); i++)
+        {
+            int nx = g[kx][ky][i].first;
+            int ny = g[kx][ky][i].second;
+            if (!v[nx][ny])
+            {
+                v[nx][ny] = true;
+                q.push({nx, ny});
+                cnt++;
+            }
+        }
+        q.pop();
     }
-    return s;
-}
-void update(int p, int v)
-{
-    while (p <= n + 1)
-    {
-        tree[p] += v;
-        p += p & -p;
-    }
+    return ((long long)cnt) * (cnt - 1);
 }
 int main()
 {
-    cin >> n;
-    for (int i = 1; i <= n; i++)
+    cin >> n >> m;
+    for (int i = 0; i < m; i++)
     {
-        cin >> a[i];
+        int x1, y1, x2, y2;
+        cin >> x1 >> y1 >> x2 >> y2;
+        g[x1][y1].push_back({x2, y2});
+        g[x2][y2].push_back({x1, y1});
+        st.push_back({x1, y1});
+        st.push_back({x2, y2});
     }
-    for (int i = 0; i < n - 1; i++)
+    ans = ((long long)n) * n;
+    for (int i = 0; i < st.size(); i++)
     {
-        int a, b;
-        cin >> a >> b;
-        snum[a]++;
-        f[b] = a;
-    }
-    for (int i = 1; i <= n; i++)
-    {
-        if (snum[i] == 0)
+        if (!v[st[i].first][st[i].second])
         {
-            q.push({a[i], i});
-        }
-    }
-    long long ans = 0;
-    while (!q.empty())
-    {
-        int p = q.top().second;
-        ans += sum(p);
-        ans += (q.top().first) * 3;
-        update(p, q.top().first);
-        q.pop();
-        snum[f[p]]--;
-        if (snum[f[p]] == 0)
-        {
-            q.push({a[f[p]], f[p]});
+            v[st[i].first][st[i].second] = true;
+            ans += bfs(st[i].first, st[i].second);
         }
     }
     cout << ans << endl;

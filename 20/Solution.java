@@ -1,80 +1,83 @@
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.Set;
 
 public class Solution
 {
-    // time complexity: O(n^3)
+    public static Map<String, List<Pair>> graph;
+    public static Map<String, Integer> dp;
+    public static Set<String> visited;
+
+    public static void dfs(String u, int ac)
+    {
+        dp.put(u, ac);
+        List<Pair> neighbors = graph.get(u);
+        for (int i = 0; i < neighbors.size(); i++)
+        {
+            Pair neighbor = neighbors.get(i);
+            if (!visited.contains(neighbor.first))
+            {
+                visited.add(neighbor.first);
+                dfs(neighbor.first, ac + neighbor.second);
+            }
+        }
+    }
+
     public static void main(String[] args)
     {
+        graph = new HashMap<>();
+        dp = new HashMap<>();
+        visited = new HashSet<>();
+
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
-        Map<Integer, Segment> q = new HashMap<>();
+        int m = sc.nextInt();
+        String rt = null;
 
-        for (int i = 0; i < n; i++)
+        for (int i = 0; i < n - 1; i++)
         {
-            int s = sc.nextInt();
-            int e = sc.nextInt();
-            q.put(i, new Segment(s, e, i));
+            String a = sc.next();
+            String b = sc.next();
+            int x = sc.nextInt();
+            if (i == 0)
+            {
+                rt = a;
+            }
+            if (!graph.containsKey(a))
+                graph.put(a, new ArrayList<>());
+            if (!graph.containsKey(b))
+                graph.put(b, new ArrayList<>());
+            graph.get(a).add(new Pair(b, x));
+            graph.get(b).add(new Pair(a, -x));
+        }
+
+        visited.add(rt);
+        dp.put(rt, 0);
+        dfs(rt, 0);
+
+        for (int i = 0; i < m; i++)
+        {
+            String a = sc.next();
+            String b = sc.next();
+            System.out.println(dp.get(b) - dp.get(a));
         }
 
         sc.close();
-
-        int ans = 0;
-
-        while (!q.isEmpty())
-        {
-            Segment cur = q.entrySet().iterator().next().getValue();
-
-            List<Segment> rm = new ArrayList<>();
-            rm.add(cur);
-
-            for (Integer id : q.keySet())
-            {
-                Segment s = q.get(id);
-                if (s != cur)
-                {
-                    if (!overlapSegs(s, rm))
-                    {
-                        rm.add(s);
-                    }
-                }
-            }
-
-           for (Segment s : rm)
-           {
-               q.remove(s.id);
-           }
-
-            ans++;
-        }
-
-        System.out.println(ans);
     }
 
-    public static boolean overlapSegs(Segment a, List<Segment> segs)
+    static class Pair
     {
-        for (Segment seg : segs)
-        {
-            if (a.start >= seg.start && a.start <= seg.end)
-                return true;
-            if (a.end >= seg.start && a.end <= seg.end)
-                return true;
-        }
-        return false;
-    }
+        public String first;
+        public int second;
 
-    static class Segment
-    {
-        int start, end, id;
-
-        public Segment(int start, int end, int id)
+        public Pair(String first, int second)
         {
-            this.start = start;
-            this.end = end;
-            this.id = id;
+            this.first = first;
+            this.second = second;
         }
     }
 }

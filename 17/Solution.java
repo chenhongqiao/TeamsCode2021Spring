@@ -1,86 +1,90 @@
-import java.util.PriorityQueue;
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Scanner;
 
-public class Solution {
-    public static int n;
-    public static int tree[];
+public class Solution
+{
+    public static ArrayList<Point>[][] graph;
+    public static boolean[][] visited;
 
-    public static int sum(int p) {
-        int s = 0;
-        while (p > 0) {
-            s += tree[p];
-            p -= p & -p;
+    public static long bfs(int x, int y)
+    {
+        Queue<Point> q = new LinkedList<>();
+        q.add(new Point(x, y));
+        long cnt = 1;
+        while (!q.isEmpty())
+        {
+            Point cur = q.poll();
+            for (int i = 0; i < graph[cur.x][cur.y].size(); i++)
+            {
+                Point neighbor = graph[cur.x][cur.y].get(i);
+                if (!visited[neighbor.x][neighbor.y])
+                {
+                    q.add(new Point(neighbor.x, neighbor.y));
+                    visited[neighbor.x][neighbor.y] = true;
+                    cnt++;
+                }
+            }
         }
-        return s;
+        return cnt * (cnt - 1);
     }
 
-    public static void update(int p, int v) {
-        while (p <= n + 1) {
-            tree[p] += v;
-            p += p & -p;
-        }
-    }
-
-    public static void main(String[] args) {
+    @SuppressWarnings("unchecked")
+    public static void main(String[] args)
+    {
         Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        graph = new ArrayList[n + 1][n + 1];
+        visited = new boolean[n + 1][n + 1];
+        ArrayList<Point> cities = new ArrayList<Point>();
 
-        n = sc.nextInt();
-
-        int[] a = new int[100005];
-        int[] f = new int[100005];
-        int[] snum = new int[100005];
-        tree = new int[100005];
-
-        Queue<Pair> q = new PriorityQueue<>();
-
-        for (int i = 1; i <= n; i++) {
-            a[i] = sc.nextInt();
+        for (int i = 0; i < m; i++)
+        {
+            int x1 = sc.nextInt();
+            int y1 = sc.nextInt();
+            int x2 = sc.nextInt();
+            int y2 = sc.nextInt();
+            if (graph[x1][y1] == null)
+            {
+                graph[x1][y1] = new ArrayList<>();
+            }
+            if (graph[x2][y2] == null)
+            {
+                graph[x2][y2] = new ArrayList<>();
+            }
+            graph[x1][y1].add(new Point(x2, y2));
+            graph[x2][y2].add(new Point(x1, y1));
+            cities.add(new Point(x1, y1));
+            cities.add(new Point(x2, y2));
         }
-
-        for (int i = 0; i < n - 1; i++) {
-            int pageA = sc.nextInt();
-            int pageB = sc.nextInt();
-            snum[pageA]++;
-            f[pageB] = pageA;
-        }
-
+        
         sc.close();
-
-        for (int i = 1; i <= n; i++) {
-            if (snum[i] == 0)
-                q.add(new Pair(a[i], i));
+        
+        long ans = (long)n * n;
+        
+        for (int i = 0; i < cities.size(); i++)
+        {
+            Point city = cities.get(i);
+            if (!visited[city.x][city.y])
+            {
+                visited[city.x][city.y] = true;
+                ans += bfs(city.x, city.y);
+            }
         }
-
-        long ans = 0;
-        while (!q.isEmpty()) {
-            Pair cur = q.poll();
-            int p = cur.second;
-            ans += sum(p);
-            ans += cur.first * 3;
-            update(p, cur.first);
-            snum[f[p]]--;
-            if (snum[f[p]] == 0)
-                q.add(new Pair(a[f[p]], f[p]));
-        }
-
         System.out.println(ans);
-
     }
 
-    static class Pair implements Comparable<Pair> {
-        public int first;
-        public int second;
+    static class Point
+    {
+        public int x;
+        public int y;
 
-        public Pair(int first, int second) {
-            this.first = first;
-            this.second = second;
-        }
-
-        @Override
-        public int compareTo(Solution.Pair arg0) {
-            // reverse comparison for maxheap
-            return -Integer.compare(first, arg0.first);
+        public Point(int x, int y)
+        {
+            this.x = x;
+            this.y = y;
         }
     }
 }

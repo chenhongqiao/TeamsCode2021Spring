@@ -49,7 +49,7 @@ void tarjan(int u) {
         g[st.top()] = gcnt;
         ++sz[gcnt];
         cur[gcnt] = sz[gcnt];
-        ans += sz[gcnt] * (sz[gcnt] - 1) / 2;
+        ans += (ll)sz[gcnt] * (sz[gcnt] - 1) / 2;
         st.pop();
     }
 }
@@ -81,7 +81,7 @@ int main() {
         int u = q.front();
         q.pop();
         for (int v : de[u]) {
-            ans += cur[u] * sz[v];
+            ans += (ll)cur[u] * sz[v];
             cur[v] += cur[u];
             --deg[v];
             if (!deg[v]) q.push(v);

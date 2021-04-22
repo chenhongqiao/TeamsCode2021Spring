@@ -1,56 +1,75 @@
 #include <bits/stdc++.h>
-#define umap unordered_map
 using namespace std;
-int n, m;
-long long ans = 0;
-umap<int, umap<int, vector<pair<int, int>>>> g;
-umap<int, umap<int, bool>> v;
-vector<pair<int, int>> st;
-long long bfs(int x, int y)
+vector<pair<int, int>> df;
+bool mp[1005];
+bool cmp(pair<int, int> a, pair<int, int> b)
 {
+    return a.second > b.second;
+}
+bool cmp1(pair<int, int> a, pair<int, int> b)
+{
+    if (a.second == b.second)
+    {
+        return a.first < b.first;
+    }
+    return a.second > b.second;
+}
+int n, m, q;
+int ans[1005];
+vector<int> g[1005];
+void bfs(int f, int fv)
+{
+    bool vis[1005];
     queue<pair<int, int>> q;
-    q.push({x, y});
-    int cnt = 1;
+    q.push({f, fv});
+    vis[f] = true;
     while (!q.empty())
     {
-        int kx = q.front().first;
-        int ky = q.front().second;
-        for (int i = 0; i < g[kx][ky].size(); i++)
+        auto k = q.front();
+        ans[k.first] = max(ans[k.first], k.second);
+        for (int i = 0; i < g[k.first].size(); i++)
         {
-            int nx = g[kx][ky][i].first;
-            int ny = g[kx][ky][i].second;
-            if (!v[nx][ny])
+            if (!vis[g[k.first][i]] && !mp[g[k.first][i]] && k.second / 2 > ans[g[k.first][i]])
             {
-                v[nx][ny] = true;
-                q.push({nx, ny});
-                cnt++;
+                vis[g[k.first][i]] = true;
+                q.push({g[k.first][i], k.second / 2});
             }
         }
         q.pop();
     }
-    return ((long long)cnt) * (cnt - 1);
 }
+vector<pair<int, int>> ar;
 int main()
 {
-    cin >> n >> m;
+    cin >> n >> m >> q;
     for (int i = 0; i < m; i++)
     {
-        int x1, y1, x2, y2;
-        cin >> x1 >> y1 >> x2 >> y2;
-        g[x1][y1].push_back({x2, y2});
-        g[x2][y2].push_back({x1, y1});
-        st.push_back({x1, y1});
-        st.push_back({x2, y2});
+        int f, v;
+        cin >> f >> v;
+        df.push_back({f, v});
+        mp[f] = true;
     }
-    ans = ((long long)n) * n;
-    for (int i = 0; i < st.size(); i++)
+    for (int i = 0; i < q; i++)
     {
-        if (!v[st[i].first][st[i].second])
-        {
-            v[st[i].first][st[i].second] = true;
-            ans += bfs(st[i].first, st[i].second);
-        }
+        int a, b;
+        cin >> a >> b;
+        g[a].push_back(b);
+        g[b].push_back(a);
     }
-    cout << ans << endl;
+
+    sort(df.begin(), df.end(), cmp);
+    for (int i = 0; i < df.size(); i++)
+    {
+        bfs(df[i].first, df[i].second);
+    }
+    for (int i = 1; i <= n; i++)
+    {
+        ar.push_back({i, ans[i]});
+    }
+    sort(ar.begin(), ar.end(), cmp1);
+    for (int i = 0; i < ar.size(); i++)
+    {
+        cout << ar[i].first << " " << ar[i].second << endl;
+    }
     return 0;
 }

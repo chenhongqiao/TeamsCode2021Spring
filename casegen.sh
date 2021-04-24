@@ -8,7 +8,7 @@ do
     mkdir tests
     
     g++ solution.cpp -o solution -O2
-    javac Solution.java
+    javac program.java
 
     excep=false
     for c in cases/*.in
@@ -16,7 +16,7 @@ do
         fn=${c##*/}
         num=${fn%.in}
 
-        cat $c | java Solution > tests/"$num-java.out"
+        cat $c | java program > tests/"$num-java.out"
         cat $c | ./solution > tests/"$num-cpp.out"
         cat $c | python "$p.py" > tests/"$num-python.out"
 

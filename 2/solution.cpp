@@ -4,16 +4,12 @@ int main()
 {
     int n;
     cin >> n;
-    int ans = 0;
     for (int i = 0; i < n; i++)
     {
         int v;
         cin >> v;
-        if (v % 2 == 0)
-        {
-            ans++;
-        }
+        cout << v % 3 << " ";
     }
-    cout << ans << endl;
+    cout << endl;
     return 0;
 }

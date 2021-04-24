@@ -1,8 +1,9 @@
 #include <bits/stdc++.h>
 #define rand(l, h) (rand() % (h - l + 1) + l)
 using namespace std;
-int v[1005][1005];
-int vl[1005];
+int v[10005][10005];
+int vl[10005];
+vector<pair<int, int>> g;
 int main()
 {
     srand(time(0));
@@ -11,26 +12,32 @@ int main()
     cout << n << " " << m << " " << q << endl;
     for (int i = 0; i < m; i++)
     {
-        int a = rand(1, n);
+        int a = rand(2, n);
         while (vl[a])
         {
-            a = rand(1, n);
+            a = rand(2, n);
         }
+        g.push_back({1, a});
         vl[a] = true;
         cout << a << " " << rand(1, 100000) << endl;
     }
 
-    for (int i = 0; i < q; i++)
+    while (g.size() < q)
     {
-        int a = rand(1, n);
-        int b = rand(1, n);
+        int a = rand(2, n);
+        int b = rand(2, n);
         while (v[a][b] || v[b][a] || a == b)
         {
-            a = rand(1, n);
-            b = rand(1, n);
+            a = rand(2, n);
+            b = rand(2, n);
         }
         v[a][b] = true;
-        cout << a << " " << b << " " << endl;
+        g.push_back({a, b});
+    }
+
+    for (int i = 0; i < q; i++)
+    {
+        cout << g[i].first << " " << g[i].second << endl;
     }
     return 0;
 }

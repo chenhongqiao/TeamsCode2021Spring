@@ -16,10 +16,10 @@ int main()
         }
     }
     cout << endl;
-    for (int i = 0; i < n; i++)
+    for (int i = 0; i < m; i++)
     {
         cout << rand(5, 1000000);
-        if (i != n - 1)
+        if (i != m - 1)
         {
             cout << " ";
         }

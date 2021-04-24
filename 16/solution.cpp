@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 vector<pair<int, int>> df;
-bool mp[1005];
+bool mp[10005];
 bool cmp(pair<int, int> a, pair<int, int> b)
 {
     return a.second > b.second;
@@ -15,11 +15,11 @@ bool cmp1(pair<int, int> a, pair<int, int> b)
     return a.second > b.second;
 }
 int n, m, q;
-int ans[1005];
-vector<int> g[1005];
+int ans[10005] = {0};
+vector<int> g[10005];
 void bfs(int f, int fv)
 {
-    bool vis[1005];
+    bool vis[10005] = {false};
     queue<pair<int, int>> q;
     q.push({f, fv});
     vis[f] = true;

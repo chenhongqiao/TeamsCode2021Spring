@@ -28,10 +28,7 @@ for i, j, d in queue:
                 maze_vis[x][y] = 1
                 queue.append((x, y, d+1))
             elif d == maze_dist[x][y]:
-                maze_num[x][y] += maze_num[i][j] 
+                maze_num[x][y] += maze_num[i][j]
                 maze_num[x][y] = maze_num[x][y] % (10**9+7)
-        
+
 print(maze_num[N-1][M-1])
-
-        
-

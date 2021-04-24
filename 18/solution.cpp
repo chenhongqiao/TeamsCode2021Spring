@@ -5,10 +5,10 @@ int a[100005];
 int f[100005];
 int snum[100005];
 priority_queue<pair<int, int>> q;
-int tree[100005];
-int sum(int p)
+long long tree[100005];
+long long sum(int p)
 {
-    int s = 0;
+    long long s = 0;
     while (p > 0)
     {
         s += tree[p];
@@ -16,7 +16,7 @@ int sum(int p)
     }
     return s;
 }
-void update(int p, int v)
+void update(int p, long long v)
 {
     while (p <= n + 1)
     {

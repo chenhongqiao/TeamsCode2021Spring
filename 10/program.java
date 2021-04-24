@@ -12,6 +12,6 @@ public class program {
         int finalTimeMins = initTimeMins + dt;
         int hrs = finalTimeMins / 60 % 24;
         int mins = finalTimeMins % 60;
-        System.out.printf("%d:%d\n", hrs, mins);
+        System.out.printf("%02d:%02d\n", hrs, mins);
     }
 }

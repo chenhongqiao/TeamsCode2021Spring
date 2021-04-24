@@ -19,7 +19,7 @@ int ans[10005] = {0};
 vector<int> g[10005];
 void bfs(int f, int fv)
 {
-    bool vis[1005] = {false};
+    bool vis[10005] = {false};
     queue<pair<int, int>> q;
     q.push({f, fv});
     vis[f] = true;

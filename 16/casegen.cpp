@@ -1,8 +1,8 @@
 #include <bits/stdc++.h>
 #define rand(l, h) (rand() % (h - l + 1) + l)
 using namespace std;
-int v[1005][1005];
-int vl[1005];
+int v[10005][10005];
+int vl[10005];
 vector<pair<int, int>> g;
 int main()
 {

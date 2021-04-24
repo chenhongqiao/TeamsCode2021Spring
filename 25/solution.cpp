@@ -18,11 +18,11 @@ typedef long long ll;
 
 const int maxn = 5e4 + 10, inf = 1e9;
 
-int n, m;
+int n, m;//number of tasks, number of rewards
 int c[maxn], r[maxn];
 
 //first m nodes are rewards, next n nodes are tasks, n + m + 1 is supersource, n + m + 2 is supersink
-int s = n + m + 1, t = n + m + 2;
+int s, t;
 
 struct edge{
     int to, nxt, cp;
@@ -82,6 +82,7 @@ ll aug(int u, ll f) {
 
 int main() {
     scanf("%d%d", &n, &m);
+    s = n + m + 1, t = n + m + 2;
     for (int i = 1; i <= n; ++i) {
         scanf("%d", &c[i]);
         addedge(m + i, t, c[i]);

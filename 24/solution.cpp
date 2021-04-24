@@ -22,11 +22,11 @@ int n, m;
 vector <int> edge[maxn];
 int dfn[maxn], cnt, low[maxn];
 stack <int> st;
-int g[maxn], gcnt;
+int g[maxn], gcnt, sz[maxn];
 vector <int> de[maxn];
-int deg[maxn], sz[maxn], cur[maxn];
 set <pii> he;
 ll ans = 0;
+bool vis[maxn];
 
 void tarjan(int u) {
     dfn[u] = ++cnt;
@@ -37,7 +37,7 @@ void tarjan(int u) {
             tarjan(v);
             low[u] = min(low[u], low[v]);
         }
-        else low[u] = min(low[u], dfn[v]);
+        else if (!g[v]) low[u] = min(low[u], dfn[v]);
     }
     if (dfn[u] == low[u]) {
         ++gcnt;
@@ -48,9 +48,17 @@ void tarjan(int u) {
         }
         g[st.top()] = gcnt;
         ++sz[gcnt];
-        cur[gcnt] = sz[gcnt];
         ans += (ll)sz[gcnt] * (sz[gcnt] - 1) / 2;
         st.pop();
+    }
+}
+
+void dfs(int u, int val) {
+    for (int v : de[u]) {
+        if (vis[v]) continue;
+        vis[v] = true;
+        ans += (ll)val * sz[v];
+        dfs(v, val);
     }
 }
 
@@ -69,23 +77,12 @@ int main() {
             if (g[u] != g[v] && he.find(mp(g[u], g[v])) == he.end()) {
                 he.insert(mp(g[u], g[v]));
                 de[g[u]].pb(g[v]);
-                ++deg[g[v]];
             }
         }
     }
-    queue <int> q;
-    for (int i = 1; i <= n; ++i) {
-        if (!deg[i]) q.push(i);
-    }
-    while (!q.empty()) {
-        int u = q.front();
-        q.pop();
-        for (int v : de[u]) {
-            ans += (ll)cur[u] * sz[v];
-            cur[v] += cur[u];
-            --deg[v];
-            if (!deg[v]) q.push(v);
-        }
+    for (int i = 1; i <= gcnt; ++i) {
+        memset(vis, 0, sizeof(vis));
+        dfs(i, sz[i]);
     }
     printf("%lld", ans);
 }

@@ -30,7 +30,7 @@ int main() {
     for (int i = 1; i <= m; ++i) {
         scanf("%d", &r[i]);
     }
-    for (int i = 1; i <= n; ++i) {
+    for (int i = 1; i <= m; ++i) {
         int x;
         scanf("%d", &x);
         for (int j = 0; j < x; ++j) {
@@ -39,6 +39,24 @@ int main() {
             req[i].pb(t);
         }
     }
-    for (int i = 0; i < (1 << 
+    ll ans = 0;
+    bool d[maxn];
+    for (int i = 0; i < (1 << m); ++i) {
+        ll t = 0;
+        memset(d, 0, sizeof(d));
+        for (int j = 0; j < m; ++j) {
+            if (i & (1 << j)) {
+                t += r[j + 1];
+                for (int k : req[j + 1]) {
+                    if (!d[k]) {
+                        t -= c[k];
+                        d[k] = true;
+                    }
+                }
+            }
+        }
+        ans = max(ans, t);
+    }
+    printf("%lld", ans);
 }
 

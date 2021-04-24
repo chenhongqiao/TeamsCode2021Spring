@@ -16,7 +16,7 @@ typedef long long ll;
 #define f first
 #define s second
 
-const int maxn = 5e4 + 10, inf = 1e9;
+const int maxn = 5e4 + 10, inf = 1e9 + 10;
 
 int n, m;//number of tasks, number of rewards
 int c[maxn], r[maxn];
@@ -27,7 +27,7 @@ int s, t;
 struct edge{
     int to, nxt, cp;
 }p[5000020];
-int ohead[maxn], head[maxn], ecnt = 2;
+int ohead[maxn << 1], head[maxn << 1], ecnt = 2;
 
 void addedge(int u, int v, int c) {
     p[ecnt].nxt = ohead[u];

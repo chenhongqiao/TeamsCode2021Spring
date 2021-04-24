@@ -16,7 +16,7 @@ typedef long long ll;
 #define f first
 #define s second
 
-const int maxn = 11;
+const int maxn = 25;
 
 int n, m;
 int c[maxn], r[maxn];

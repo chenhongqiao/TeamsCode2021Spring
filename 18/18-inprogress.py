@@ -1,10 +1,14 @@
 #include <bits/stdc++.h>
 from queue import PriorityQueue
 
-f = [0]*100005 #int f[100005];
-sumnums = [0]*100005 #int snum[100005];
+f, sumnums, tree = [], [], []
+
+for _ in range(100005):
+    f.append(0)
+    sumnums.append(0)
+    tree.append(0)
+    
 q = PriorityQueue() #priority_queue<pair<int, int>> q;
-tree = [0]*100005 #long long tree[100005];
 
 def summation(p):
     s = 0

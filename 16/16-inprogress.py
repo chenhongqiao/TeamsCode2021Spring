@@ -1,5 +1,3 @@
-#include <bits/stdc++.h>
-
 df, mp, res, g = [], [], [], []
 
 for _ in range(10005):

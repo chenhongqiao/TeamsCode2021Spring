@@ -15,9 +15,9 @@ def bfs(x, y):
     cnt = 1
 
     while (q):
-        kx, ky = q[0][1], q[0][1]
+        kx, ky = q[0][0], q[0][1]
 
-        for idx in range(len(g[kx][ky])): #i < g[kx][ky].size(); i++)
+        for idx in range(len(g[kx][ky])):
             nx, ny = g[kx][ky][idx][0], g[kx][ky][idx][1]
         
             if (not v[nx][ny]):

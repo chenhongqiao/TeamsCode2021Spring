@@ -1,4 +1,4 @@
-def summation(p): #long long sum(int p)
+def summation(p): 
     s = 0
     while (p > 0):
         s += tree[p]
@@ -6,13 +6,12 @@ def summation(p): #long long sum(int p)
 
     return s
 
-def update_queue(p, v): #void update(int p, long long v)
+def update_queue(p, v): 
     while (p <= N + 1):
         tree[p] += v
         p += p & (-p)
 
-q = [] #python translation
-
+q = [] 
 a, f, snum, tree = [0], [], [], []
 N = int(input())
 
@@ -25,29 +24,29 @@ arr = list(map(int, input().split()))
 for num in arr:
     a.append(num)
 
-for j in range(N-1): #for (int i = 0; i < n - 1; i++)
+for j in range(N-1): 
     a_num, b = map(int, input().split())
     snum[a_num] += 1
     f[b] = a_num
 
-for k in range(1, N+1): #for (int i = 1; i <= n; i++)
+for k in range(1, N+1): 
     if (snum[k] == 0):
-        q.append([a[k], k]) #python translation?
+        q.append([a[k], k]) 
         q = sorted(q, key = lambda x: -x[0])
 
 res = 0
 
 while (q):
     top = q[0]
-    p = top[1] #python translation
+    p = top[1] 
     res += summation(p)
-    res += (top[0]) * 3 #python translation
-    update_queue(p, top[0]) #python translation
-    q.pop(0) #python translation
+    res += (top[0]) * 3 
+    update_queue(p, top[0]) 
+    q.pop(0) 
     snum[f[p]] -= 1
 
     if (snum[f[p]] == 0):
-        q.append([a[f[p]], f[p]]) #python translation
+        q.append([a[f[p]], f[p]])
         q = sorted(q, key = lambda x: -x[0])
     
 print(res)

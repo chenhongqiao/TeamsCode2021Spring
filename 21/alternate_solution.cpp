@@ -33,7 +33,7 @@ int main() {
         scanf("%d%d", &seg[i].f, &seg[i].s);
     }
     sort(seg, seg + n, cmp);
-    multiset <int> ends;
+    multiset <int> ends;//multiset needed
     int ans = 0;
     for (int i = 0; i < n; ++i) {
         auto it = ends.lower_bound(seg[i].f);

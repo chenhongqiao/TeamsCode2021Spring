@@ -1,3 +1,5 @@
+from queue import PriorityQueue
+
 def summation(p): 
     s = 0
     while (p > 0):
@@ -11,7 +13,8 @@ def update_queue(p, v):
         tree[p] += v
         p += p & (-p)
 
-q = [] 
+q = PriorityQueue() 
+
 a, f, snum, tree = [0], [], [], []
 N = int(input())
 
@@ -31,22 +34,19 @@ for j in range(N-1):
 
 for k in range(1, N+1): 
     if (snum[k] == 0):
-        q.append([a[k], k]) 
-        q = sorted(q, key = lambda x: -x[0])
+        q.put([-a[k], k]) 
 
 res = 0
 
-while (q):
-    top = q[0]
+while (not q.empty()):
+    top = q.get()
     p = top[1] 
     res += summation(p)
-    res += (top[0]) * 3 
-    update_queue(p, top[0]) 
-    q.pop(0) 
+    res += (-top[0]) * 3 
+    update_queue(p, -top[0]) 
     snum[f[p]] -= 1
 
     if (snum[f[p]] == 0):
-        q.append([a[f[p]], f[p]])
-        q = sorted(q, key = lambda x: -x[0])
+        q.put([-a[f[p]], f[p]]) 
     
 print(res)

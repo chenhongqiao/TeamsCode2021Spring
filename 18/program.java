@@ -4,10 +4,10 @@ import java.util.Scanner;
 
 public class program {
     public static int n;
-    public static int tree[];
+    public static long tree[];
 
-    public static int sum(int p) {
-        int s = 0;
+    public static long sum(int p) {
+        long s = 0;
         while (p > 0) {
             s += tree[p];
             p -= p & -p;
@@ -15,7 +15,7 @@ public class program {
         return s;
     }
 
-    public static void update(int p, int v) {
+    public static void update(int p, long v) {
         while (p <= n + 1) {
             tree[p] += v;
             p += p & -p;
@@ -30,7 +30,7 @@ public class program {
         int[] a = new int[100005];
         int[] f = new int[100005];
         int[] snum = new int[100005];
-        tree = new int[100005];
+        tree = new long[100005];
 
         Queue<Pair> q = new PriorityQueue<>();
 
